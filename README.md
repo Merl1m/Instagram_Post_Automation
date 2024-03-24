@@ -1,4 +1,4 @@
-#Instagram Post Automation
+# Instagram Post Automation
 
 This is a simple instagram post upload automation script using selenium.
 
