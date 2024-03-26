@@ -1,5 +1,5 @@
 # Instagram Post Automation
-# Version 1.1
+# Version 1.2
 '''
 This is simple instagram post upload automation,
 it is limited to only single image file posting.
@@ -19,6 +19,8 @@ from selenium.webdriver.support import expected_conditions as EC
 
 from time import sleep
 
+from random import choice
+
 from pyautogui import typewrite
 
 # Vars
@@ -32,6 +34,8 @@ DESCRIPTION = """This is a post""" #UPDATE ME
 USERNAME = "" #UPDATE ME
 PASSWORD = "" #UPDATE ME
 
+Random_Wait_Times = [x/1000 for x in range(1000, 5001)]
+
 #Chrome Options
 Chrome_Options = webdriver.ChromeOptions()
 Chrome_Options.add_argument("--incognito")
@@ -41,19 +45,31 @@ Chrome_Options.binary_location = BRAVE
 service = Service(executable_path=DRIVER)
 Browser = webdriver.Chrome(service=service, options=Chrome_Options)
 
+#Functions
+## Function RandWait waits for randomised time segment so that instagram doesn't detect it as automation 
+def RandWait():
+    Wait_Time = choice(Random_Wait_Times)
+    sleep(Wait_Time)
+
 # Automation Process
 Browser.get(LINK)
 WebDriverWait(Browser, 10).until(EC.presence_of_element_located((By.NAME, "password")))
+RandWait()
 
 Username_Input_Element = Browser.find_element(By.NAME, "username")
 Username_Input_Element.send_keys(USERNAME)
 
 Password_Input_Element = Browser.find_element(By.NAME, "password")
-Password_Input_Element.send_keys(PASSWORD + Keys.ENTER)
+Password_Input_Element.send_keys(PASSWORD)
+RandWait()
+
+Password_Input_Element.send_keys(Keys.ENTER)
 WebDriverWait(Browser, 10).until(EC.presence_of_element_located((By.XPATH, """/html/body/div[2]/div/div/div[2]/div/div/div[1]/div[1]/div[1]/div/div/div/div/div[2]/div[7]""")))
+RandWait()
 
 Create_Button = Browser.find_element(By.XPATH, """/html/body/div[2]/div/div/div[2]/div/div/div[1]/div[1]/div[1]/div/div/div/div/div[2]/div[7]""")
 Create_Button.click()
+RandWait()
 
 WebDriverWait(Browser, 10).until(EC.presence_of_element_located((By.XPATH, """/html/body/div[6]/div[1]/div/div[3]/div/div/div/div/div/div/div/div[2]/div[1]/div/div/div[2]/div/button""")))
 Upload_Button = Browser.find_element(By.XPATH, """/html/body/div[6]/div[1]/div/div[3]/div/div/div/div/div/div/div/div[2]/div[1]/div/div/div[2]/div/button""")
@@ -66,10 +82,12 @@ sleep(2)
 
 Next_Button_1 = Browser.find_element(By.XPATH, """/html/body/div[6]/div[1]/div/div[3]/div/div/div/div/div/div/div/div[1]/div/div/div/div[3]""")
 Next_Button_1.click()
+RandWait()
 
 WebDriverWait(Browser, 10).until(EC.presence_of_element_located((By.XPATH, """/html/body/div[6]/div[1]/div/div[3]/div/div/div/div/div/div/div/div[1]/div/div/div/div[3]""")))
 Next_Button_2 = Browser.find_element(By.XPATH, """/html/body/div[6]/div[1]/div/div[3]/div/div/div/div/div/div/div/div[1]/div/div/div/div[3]""")
 Next_Button_2.click()
+RandWait()
 
 WebDriverWait(Browser, 10).until(EC.presence_of_element_located((By.XPATH, """/html/body/div[6]/div[1]/div/div[3]/div/div/div/div/div/div/div/div[2]/div[2]/div/div/div/div[1]/div[2]/div/div[1]/div[1]""")))
 Description_Box = Browser.find_element(By.XPATH, """/html/body/div[6]/div[1]/div/div[3]/div/div/div/div/div/div/div/div[2]/div[2]/div/div/div/div[1]/div[2]/div/div[1]/div[1]""")
