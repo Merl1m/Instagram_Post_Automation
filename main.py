@@ -4,7 +4,7 @@
 This is simple instagram post upload automation,
 it is limited to only single image file posting.
 
-Chrome Driver Version - 122
+Chrome Driver Version - 124
 Browser used : Brave Browser
 '''
 # Modules
