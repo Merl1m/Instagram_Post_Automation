@@ -6,7 +6,7 @@ This script is specifically crafted for my system meaning you will need to chang
 
 First step is to install the modules required from requirements.txt with "pip3 install -r requirements.txt"
 
-Second step is to change the browser settings in the script according to your needs, I have used Brave browser with chrome driver (version 122).
+Second step is to change the browser settings in the script according to your needs, I have used Brave browser with chrome driver (version 124).
 If you are using Microsoft Edge, you will need Edge Driver, and so check with browser you use and install appropriate drivers.
 Make sure your browser version and driver version is the same.
 
